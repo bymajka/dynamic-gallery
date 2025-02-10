@@ -1,0 +1,105 @@
+@use "reset";
+@use "variables" as v;
+
+body {
+    background-color: v.$background-color;
+}
+
+
+.input-form {
+    width: 600px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    &__input {
+        flex: 1;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        color: v.$text-color;
+
+        &::placeholder {
+            color: v.$text-color;
+        }
+
+        &:focus {
+            font-weight: bold;
+        }
+
+        &:first-of-type {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-right: 2px double v.$background-color;
+          }
+      
+          &:last-of-type {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+    }
+
+    button{
+        width: 80px;
+        margin-left: 10px;
+        border-radius: 10%;
+        border: none;
+        color: v.$text-color;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    }
+}
+
+.images-container {
+    -moz-column-count: v.$column-number;
+    -webkit-column-count: v.$column-number;
+    column-count: v.$column-number;
+    column-gap: v.$images-container-gap;
+
+    padding: 1rem;
+
+    .image-container {
+        break-inside: avoid-column;
+        position: relative;
+    
+        &__image {
+            border: 20px solid v.$primary-color;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    
+        &__description {
+            text-align: center;
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            color: darken($color: v.$primary-color, $amount: 20%);
+            text-shadow: 0 0 3px darken($color: v.$background-color, $amount: 20%);
+        }
+
+        &__close-button {
+            width: 35px;
+            height: 35px;
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            img {
+                width: 100%;
+
+            }
+        }
+    }
+}
