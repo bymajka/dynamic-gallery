@@ -1,6 +1,5 @@
 import { createInputElement } from "./createInputElement";
 import { addImageToPage } from "./addImageToPage";
-import { addLightboxListener } from "./addLightboxListener";
 import {
   fillPageImages,
   lightBox,
@@ -12,15 +11,9 @@ import {
   addRightArrowListener,
 } from "./addArrowsListeners";
 import "./styles/main.css";
+import { createElement } from "./createElement";
 
-const inputForm = document.createElement("form");
-inputForm.classList.add("input-form");
-const button = document.createElement("button");
-const imagesContainer = document.createElement("div");
-imagesContainer.classList.add("images-container");
-
-button.setAttribute("type", "submit");
-button.innerHTML = "Submit";
+const inputForm = createElement("form", "input-form");
 
 const inputURL = createInputElement(
   true,
@@ -29,6 +22,7 @@ const inputURL = createInputElement(
   inputForm,
   inputForm.className
 );
+
 const inputDescription = createInputElement(
   true,
   undefined,
@@ -37,22 +31,21 @@ const inputDescription = createInputElement(
   inputForm.className
 );
 
+const button = createElement("button", null, { type: "submit" });
+button.innerHTML = "Submit";
+inputForm.append(button);
+
+const imagesContainer = createElement("div", "images-container");
+
 inputForm.addEventListener("submit", (e) => {
   e.preventDefault();
   addImageToPage(inputURL.value, inputDescription.value, imagesContainer);
 });
 
-inputForm.append(button);
-document.body.append(inputForm);
-document.body.appendChild(imagesContainer);
+document.body.append(inputForm, imagesContainer);
 
-const images = document.querySelectorAll(".image-container");
 defaultImages.forEach((element) => {
   addImageToPage(element.path, element.description, imagesContainer);
-});
-
-images.forEach((image) => {
-  addLightboxListener(image, highlightedImg, lightBox);
 });
 
 window.addEventListener("click", (e) => {
