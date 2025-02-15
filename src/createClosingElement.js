@@ -1,4 +1,4 @@
-import { closingImage } from "./constants";
+import { closingImage, fillPageImages } from "./constants";
 
 export const createClosingElement = (parent) => {
   const closeButton = document.createElement("button");
@@ -8,6 +8,10 @@ export const createClosingElement = (parent) => {
   closeButton.classList.add("image-container__close-button");
   closeButton.append(imgForButton);
   closeButton.addEventListener("click", () => {
+    const deletedImage = fillPageImages.find(
+      (item) => item.path == parent.querySelector(".image-container__image").src
+    );
+    fillPageImages.splice(fillPageImages.indexOf(deletedImage), 1);
     closeButton.parentElement.remove();
   });
 

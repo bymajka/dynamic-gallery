@@ -1,6 +1,16 @@
 import { createInputElement } from "./createInputElement";
 import { addImageToPage } from "./addImageToPage";
-import { fillPageImages } from "./constants";
+import { addLightboxListener } from "./addLightboxListener";
+import {
+  fillPageImages,
+  lightBox,
+  highlightedImg,
+  defaultImages,
+} from "./constants";
+import {
+  addLeftArrowListener,
+  addRightArrowListener,
+} from "./addArrowsListeners";
 import "./styles/main.css";
 
 const inputForm = document.createElement("form");
@@ -36,6 +46,25 @@ inputForm.append(button);
 document.body.append(inputForm);
 document.body.appendChild(imagesContainer);
 
-fillPageImages.forEach((element) => {
+const images = document.querySelectorAll(".image-container");
+defaultImages.forEach((element) => {
   addImageToPage(element.path, element.description, imagesContainer);
 });
+
+images.forEach((image) => {
+  addLightboxListener(image, highlightedImg, lightBox);
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target.classList.contains("lightbox")) {
+    lightBox.lightBox.style.opacity = "0";
+    setTimeout(() => {
+      lightBox.lightBox.style.display = "none";
+    });
+  }
+});
+
+addLeftArrowListener();
+addRightArrowListener();
+
+console.log(fillPageImages);

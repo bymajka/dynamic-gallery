@@ -1,4 +1,6 @@
+import { addLightboxListener } from "./addLightboxListener";
 import { createClosingElement } from "./createClosingElement";
+import { fillPageImages, highlightedImg, lightBox } from "./constants";
 
 export const addImageToPage = (imgPath, description, parent) => {
   const container = document.createElement("div");
@@ -17,4 +19,8 @@ export const addImageToPage = (imgPath, description, parent) => {
   container.appendChild(desc);
   createClosingElement(container);
   parent.append(container);
+
+  fillPageImages.push({ path: imgPath, description: description });
+
+  addLightboxListener(newImage, highlightedImg, lightBox);
 };
