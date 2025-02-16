@@ -12,6 +12,7 @@ export const createClosingElement = (parent) => {
       (item) => item.path == parent.querySelector(".image-container__image").src
     );
     fillPageImages.splice(fillPageImages.indexOf(deletedImage), 1);
+    localStorage.removeItem(deletedImage.description);
     closeButton.parentElement.remove();
   });
 

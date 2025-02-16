@@ -40,6 +40,7 @@ const imagesContainer = createElement("div", "images-container");
 inputForm.addEventListener("submit", (e) => {
   e.preventDefault();
   addImageToPage(inputURL.value, inputDescription.value, imagesContainer);
+  localStorage.setItem(inputDescription.value, inputURL.value);
 });
 
 document.body.append(inputForm, imagesContainer);
@@ -55,6 +56,12 @@ window.addEventListener("click", (e) => {
       lightBox.lightBox.style.display = "none";
     });
   }
+});
+
+window.addEventListener("load", () => {
+  Object.entries(localStorage).forEach(([key, value]) => {
+    addImageToPage(value, key, imagesContainer);
+  });
 });
 
 addLeftArrowListener();
