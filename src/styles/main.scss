@@ -1,0 +1,156 @@
+@use "reset";
+@use "variables" as v;
+
+body {
+    background-image: linear-gradient(-45deg, v.$background-color, v.$background-color2);
+    // background-color: v.$background-color;
+}
+
+
+.input-form {
+    width: 600px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+
+    &__input {
+        flex: 1;
+        padding: 1rem;
+        outline: none;
+        border: none;
+        color: v.$input-text-color;
+
+        &::placeholder {
+            color: v.$input-text-color;
+        }
+
+        &:focus {
+            font-weight: bold;
+        }
+
+        &:first-of-type {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            border-right: 2px double v.$background-color;
+          }
+      
+          &:last-of-type {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+          }
+    }
+
+    button{
+        width: 80px;
+        margin-left: 10px;
+        border-radius: 10%;
+        border: none;
+        color: v.$input-text-color;
+
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+    }
+}
+
+.images-container {
+    -moz-column-count: v.$column-number;
+    -webkit-column-count: v.$column-number;
+    column-count: v.$column-number;
+    column-gap: v.$images-container-gap;
+
+    padding: 1rem;
+
+    @media (orientation: portrait) {
+        -moz-column-count: v.$column-number - 2;
+    -webkit-column-count: v.$column-number - 2;
+    column-count: v.$column-number - 2;
+    }
+
+    .image-container {
+        break-inside: avoid-column;
+        position: relative;
+    
+        &__image {
+            border: 20px solid v.$primary-color;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    
+        &__description {
+            text-align: center;
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            color: v.$desc-text-color;
+            text-shadow: 0 0 3px darken($color: v.$background-color, $amount: 20%);
+        }
+
+        &__close-button {
+            width: 35px;
+            height: 35px;
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+
+            img {
+                width: 100%;
+
+            }
+        }
+    }
+}
+
+.lightbox {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba($color: #333, $alpha: 0.6);
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    z-index: 2;
+
+    &__image {
+        margin: auto 0 ;
+        min-height: 400px;
+        max-height: 650px;
+        filter: drop-shadow(0 10px 35px #000);
+    }
+
+    .arrow {
+        width: 50px; 
+        height: 50px; 
+        transition: .5s; 
+        box-shadow: -5px 5px 0 rgb(255, 255, 255); 
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: -5px 5px 0 #333;
+            transition: 0.5s;
+        }
+    }
+  
+    .arrow-left { 
+        transform: rotate(45deg); 
+    } 
+  
+    .arrow-right { 
+        transform: rotate(-135deg); 
+    } 
+}
