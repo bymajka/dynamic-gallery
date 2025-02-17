@@ -117,6 +117,7 @@ body {
 }
 .images-container .image-container__image {
   border: 20px solid #ffedd5;
+  border-radius: 10px;
   display: block;
   width: 100%;
   box-sizing: border-box;
